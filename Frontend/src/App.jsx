@@ -1,31 +1,31 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './Context/AuthContext';
 import AnimatedFooter from './Components/AnimatedFooter';
-import HomePage from './pages/HomePage';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dasboard';
-import FarmerDashboard from './pages/FarmerDasboard';
-import OwnerDashboard from './pages/OwnerDasboard';
+import HomePage from './Pages/HomePage';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
+import Dashboard from './Pages/Dasboard';
+import FarmerDashboard from './Pages/FarmerDasboard';
+import OwnerDashboard from './Pages/OwnerDasboard';
 import ProtectedRoute from './Components/ProtectedRoute';
 
-import UserProfile from './pages/UserProfile';
-import EditProfile from './pages/EditProfile';
-import ChangePassword from './pages/ChangePassword';
-import UploadDocuments from './pages/UploadDocument';
-import AddEquipmentForm from './pages/AddEquipment';
-import EquipmentsPage from './pages/MyEquipments';
-import EquipmentDetails from './pages/EquipmentDetails';
-import BrowseEquipment from './pages/BrowseEquipment';
-import MyBookings from './pages/MyBookings';
-import CreateBookingForm from './pages/CreateBookingForm';
-import BookingDetails from './pages/BookingsDetails';
-import BookingRequestsPage from './pages/BokkingRequestPage'; // ✅ Owner view of farmer bookings
-import RentalForm from './pages/RentForm'; // ✅ New rental form page
-import RentalHistory from './pages/RentalHistory'; // ✅ Add RentalHistory page
+import UserProfile from './Pages/UserProfile';
+import EditProfile from './Pages/EditProfile';
+import ChangePassword from './Pages/ChangePassword';
+import UploadDocuments from './Pages/UploadDocument';
+import AddEquipmentForm from './Pages/AddEquipment';
+import EquipmentsPage from './Pages/MyEquipments';
+import EquipmentDetails from './Pages/EquipmentDetails';
+import BrowseEquipment from './Pages/BrowseEquipment';
+import MyBookings from './Pages/MyBookings';
+import CreateBookingForm from './Pages/CreateBookingForm';
+import BookingDetails from './Pages/BookingsDetails';
+import BookingRequestsPage from './Pages/BokkingRequestPage'; // ✅ Owner view of farmer bookings
+import RentalForm from './Pages/RentForm'; // ✅ New rental form page
+import RentalHistory from './Pages/RentalHistory'; // ✅ Add RentalHistory page
 
 // Import the new Equipment Analytics page component
-import EquipmentAnalyticsPage from './pages/analytics'; // New page for analytics
+import EquipmentAnalyticsPage from './Pages/analytics'; // New page for analytics
 
 import './Components/FooterAnimation.css'; // Import the footer animation CSS
 
