@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './Context/AuthContext';
-import AnimatedFooter from './components/AnimatedFooter';
+import AnimatedFooter from './Components/AnimatedFooter';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dasboard';
 import FarmerDashboard from './pages/FarmerDasboard';
 import OwnerDashboard from './pages/OwnerDasboard';
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './Components/ProtectedRoute';
 
 import UserProfile from './pages/UserProfile';
 import EditProfile from './pages/EditProfile';
