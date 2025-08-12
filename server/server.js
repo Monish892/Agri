@@ -7,7 +7,8 @@ const path = require('path');
 
 dotenv.config();
 
-const authRoutes = require('./routes/authRoutes');
+// In server.js
+const authRoutes = require('./routes/authroutes');
 const userRoutes = require('./routes/userRoutes');
 const equipmentRoutes = require('./routes/equipmentRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
