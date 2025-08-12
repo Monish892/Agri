@@ -1,0 +1,487 @@
+/* Import Font Awesome first (moved to the top) */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+/* FooterAnimation.css */
+
+/* App container setup for footer positioning */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+  
+.content-container {
+    flex: 1;
+}
+  
+/* Animated Footer Styles */
+.animated-footer {
+    position: relative;
+    background: linear-gradient(to bottom, #f5f7fa, #e5e9f0);
+    color: #333;
+    padding: 4rem 2rem 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+}
+  
+/* Background Animation */
+.footer-animation-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    opacity: 0.1;
+}
+  
+/* Tractor Animation */
+.tractor-animation {
+    position: absolute;
+    bottom: 10px;
+    left: -100px;
+    animation: tractorMove 30s linear infinite;
+}
+  
+.tractor {
+    position: relative;
+    width: 80px;
+    height: 50px;
+}
+  
+.tractor-body {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: 50px;
+    height: 25px;
+    background-color: #e74c3c;
+    border-radius: 5px;
+}
+  
+.tractor-cabin {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    width: 25px;
+    height: 20px;
+    background-color: #3498db;
+    border-radius: 5px 5px 0 0;
+}
+  
+.tractor-wheel {
+    position: absolute;
+    bottom: 0;
+    background-color: #333;
+    border-radius: 50%;
+    animation: wheelRotate 2s linear infinite;
+}
+  
+.tractor-wheel.front {
+    width: 15px;
+    height: 15px;
+    left: 10px;
+}
+  
+.tractor-wheel.back {
+    width: 20px;
+    height: 20px;
+    left: 55px;
+}
+  
+/* Plants Animation */
+.plants {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+}
+  
+.plant {
+    position: absolute;
+    bottom: 0;
+}
+  
+.plant-1 { left: 10%; animation: plantGrow 3s ease-in-out infinite; }
+.plant-2 { left: 30%; animation: plantGrow 4s ease-in-out infinite 0.5s; }
+.plant-3 { left: 50%; animation: plantGrow 3.5s ease-in-out infinite 1s; }
+.plant-4 { left: 70%; animation: plantGrow 4.5s ease-in-out infinite 1.5s; }
+.plant-5 { left: 90%; animation: plantGrow 3s ease-in-out infinite 2s; }
+  
+.stem {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    height: 30px;
+    background-color: #2ecc71;
+    transform-origin: bottom center;
+}
+  
+.leaf {
+    position: absolute;
+    width: 15px;
+    height: 10px;
+    background-color: #27ae60;
+    border-radius: 50% 50% 0 50%;
+}
+  
+.leaf-1 {
+    bottom: 15px;
+    left: -13px;
+    transform: rotate(-30deg);
+}
+  
+.leaf-2 {
+    bottom: 25px;
+    left: 4px;
+    transform: rotate(30deg);
+}
+  
+/* Footer Content Structure */
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2rem;
+}
+  
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+  
+.footer-section h3 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    position: relative;
+    font-size: 1.5rem;
+}
+  
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #4caf50;
+    transition: width 0.4s;
+}
+  
+.footer-section:hover h3::after {
+    width: 70px;
+}
+  
+.highlight-text {
+    position: relative;
+    display: inline-block;
+    color: #4caf50;
+    font-weight: bold;
+    font-size: 2rem;
+}
+  
+.highlight-text::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 10px;
+    z-index: -1;
+    transform: skew(-5deg);
+}
+  
+/* About Section */
+.about p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+  
+.contact p {
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+}
+  
+.contact p i {
+    margin-right: 10px;
+    color: #4caf50;
+}
+  
+.socials {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 15px;
+}
+  
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    color: #4caf50;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none;  /* Added to ensure links look good */
+}
+
+/* Enhanced styles for Font Awesome icons */
+.social-icon i {
+    font-size: 1.2rem; /* Ensure icon size is appropriate */
+}
+  
+.social-icon:hover {
+    transform: translateY(-5px);
+    background: #4caf50;
+    color: #fff;
+}
+  
+/* Links Section */
+.links ul {
+    list-style: none;
+    padding: 0;
+}
+  
+.links ul li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 20px;
+    transition: transform 0.3s ease;
+}
+  
+.links ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #4caf50;
+    transition: transform 0.3s ease;
+}
+  
+.links ul li:hover {
+    transform: translateX(5px);
+}
+  
+.links ul li:hover::before {
+    transform: translateX(3px);
+}
+  
+.links ul li a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+  
+.links ul li a:hover {
+    color: #4caf50;
+}
+  
+/* Contact Form */
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+  
+.contact-form input,
+.contact-form textarea {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+  
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-left: 3px solid #4caf50;
+}
+  
+.contact-form textarea {
+    resize: none;
+    height: 100px;
+}
+  
+.btn-submit {
+    padding: 10px 15px;
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+}
+  
+.btn-submit:hover {
+    background: #388e3c;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+}
+  
+/* Footer Bottom */
+.footer-bottom {
+    position: relative;
+    z-index: 1;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+  
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+  
+.footer-menu {
+    display: flex;
+    gap: 20px;
+}
+  
+.footer-menu a {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+  
+.footer-menu a:hover {
+    color: #4caf50;
+}
+  
+/* Wave Animation */
+.footer-wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+    pointer-events: none;
+}
+  
+.footer-wave {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 65px;
+    animation: waveAnimation 15s ease-in-out infinite alternate;
+}
+  
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    z-index: 999;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+}
+  
+.scroll-to-top:hover {
+    background-color: #388e3c;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Scroll to Top Icon specific styling */
+.scroll-to-top i {
+    font-size: 1.2rem;
+}
+  
+/* Animations */
+@keyframes tractorMove {
+    0% {
+        transform: translateX(-100px);
+    }
+    100% {
+        transform: translateX(calc(100vw + 100px));
+    }
+}
+  
+@keyframes wheelRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+  
+@keyframes plantGrow {
+    0%, 100% {
+        transform: scaleY(0.9) rotate(0deg);
+    }
+    50% {
+        transform: scaleY(1) rotate(2deg);
+    }
+}
+  
+@keyframes waveAnimation {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-25%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+  
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+  
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-menu {
+        margin-top: 10px;
+        justify-content: center;
+    }
+}

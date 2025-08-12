@@ -1,0 +1,440 @@
+/* Scope all styles to the BookingDetails component */
+.booking-details {
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef, #f8f9fa);
+    background-size: 400% 400%;
+    border-radius: 10px;
+    animation: gradientShift 15s ease infinite, fadeIn 0.8s ease-in-out;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .booking-details::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #2c784e, #34a853, #2c784e);
+    background-size: 200% 200%;
+    animation: gradientFlow 3s ease infinite;
+  }
+  
+  .booking-details h1 {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #2c784e;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    animation: pulseText 3s infinite alternate;
+  }
+  
+  .booking-details h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #2c784e, #34a853);
+    margin: 12px auto 0;
+    border-radius: 2px;
+    animation: expandLine 1.5s ease-in-out;
+  }
+  
+  .booking-details .status-message {
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform-origin: center;
+    animation: slideInFromTop 0.6s ease-out, pulseLight 2s infinite alternate;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .booking-details .status-message.success {
+    background: linear-gradient(to right, #e6f4ea, #d8f3e9);
+    color: #34a853;
+    border-left: 4px solid #34a853;
+  }
+  
+  .booking-details .status-message.error {
+    background: linear-gradient(to right, #fdecea, #fee8e7);
+    color: #ea4335;
+    border-left: 4px solid #ea4335;
+  }
+  
+  .booking-details .status-message.info {
+    background: linear-gradient(to right, #e8f0fe, #dde9fe);
+    color: #4285f4;
+    border-left: 4px solid #4285f4;
+  }
+  
+  .booking-details .card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    padding: 25px;
+    margin-bottom: 25px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.8s ease-in-out;
+  }
+  
+  .booking-details .card::before {
+    content: "";
+    position: absolute;
+    background: linear-gradient(135deg, rgba(44, 120, 78, 0.1), rgba(52, 168, 83, 0.05));
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+  }
+  
+  .booking-details .card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+  }
+  
+  .booking-details .card:hover::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .booking-details .card h2 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 18px;
+    transition: color 0.3s ease;
+  }
+  
+  .booking-details .card:hover h2 {
+    color: #2c784e;
+  }
+  
+  .booking-details .card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 12px;
+    transition: transform 0.3s ease;
+    animation: fadeSlideIn 0.5s ease-out;
+  }
+  
+  .booking-details .card:hover p {
+    transform: translateX(5px);
+  }
+  
+  .booking-details .paypal-container {
+    margin-top: 25px;
+    text-align: center;
+    perspective: 1000px;
+  }
+  
+  .booking-details .paypal-container div {
+    display: inline-block;
+    animation: fadeIn 0.5s ease-in-out, floatAnimation 4s ease-in-out infinite;
+  }
+  
+  .booking-details .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(to right, #2c784e, #34a853);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 12px rgba(44, 120, 78, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .booking-details .btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  
+  .booking-details .btn:hover {
+    background: linear-gradient(to right, #22613f, #2c784e);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(44, 120, 78, 0.4);
+  }
+  
+  .booking-details .btn:hover::after {
+    transform: translateX(100%);
+  }
+  
+  .booking-details .btn.cancel {
+    background: linear-gradient(to right, #ea4335, #fd5949);
+    box-shadow: 0 4px 12px rgba(234, 67, 53, 0.3);
+  }
+  
+  .booking-details .btn.cancel:hover {
+    background: linear-gradient(to right, #d93025, #ea4335);
+    box-shadow: 0 8px 20px rgba(234, 67, 53, 0.4);
+  }
+  
+  .booking-details .pickup-form {
+    background: linear-gradient(to bottom, #f8f9fa, #f0f2f5);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    margin-top: 25px;
+    animation: slideDown 0.7s ease-in-out, pulseLight 3s infinite alternate;
+    transform-origin: top center;
+  }
+  
+  .booking-details .pickup-form h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 18px;
+    position: relative;
+    padding-bottom: 8px;
+  }
+  
+  .booking-details .pickup-form h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: #2c784e;
+    border-radius: 2px;
+    animation: expandLine 1.5s ease-in-out;
+  }
+  
+  .booking-details .pickup-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    margin-bottom: 18px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+  }
+  
+  .booking-details .pickup-form input:focus {
+    border-color: #2c784e;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(44, 120, 78, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  .booking-details .pickup-form button {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(to right, #34a853, #2c784e);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 12px rgba(52, 168, 83, 0.3);
+    position: relative;
+    overflow: hidden;
+    animation: pulseBtn 2s infinite alternate;
+  }
+  
+  .booking-details .pickup-form button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  
+  .booking-details .pickup-form button:hover {
+    background: linear-gradient(to right, #2c784e, #22613f);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(52, 168, 83, 0.4);
+  }
+  
+  .booking-details .pickup-form button:hover::after {
+    transform: translateX(100%);
+  }
+  
+  .booking-details .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .booking-details .loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(44, 120, 78, 0.1);
+    border-top-color: #2c784e;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(44, 120, 78, 0.2);
+    animation: spin 1s linear infinite, pulse 2s ease-in-out infinite;
+  }
+  
+  /* Enhanced Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px) scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  @keyframes slideInFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeSlideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes pulseLight {
+    0% {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    100% {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+  }
+  
+  @keyframes pulseBtn {
+    0% {
+      box-shadow: 0 4px 12px rgba(52, 168, 83, 0.2);
+    }
+    100% {
+      box-shadow: 0 8px 20px rgba(52, 168, 83, 0.3);
+    }
+  }
+  
+  @keyframes expandLine {
+    from {
+      width: 0;
+      opacity: 0;
+    }
+    to {
+      width: 80px;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes floatAnimation {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  @keyframes pulseText {
+    0% {
+      opacity: 0.9;
+    }
+    100% {
+      opacity: 1;
+      text-shadow: 0 2px 8px rgba(44, 120, 78, 0.15);
+    }
+  }

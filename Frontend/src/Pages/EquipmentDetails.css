@@ -1,0 +1,563 @@
+/* Root container styling */
+.equipment-details-container {
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.8s ease-in-out;
+    max-width: 1000px;
+    margin: 20px auto;
+  }
+  
+  /* Title styling */
+  .equipment-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #2c784e;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.8s ease-out;
+  }
+  
+  .equipment-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #2c784e, #34a853);
+    margin: 10px auto 0;
+    border-radius: 2px;
+    animation: expandLine 1.5s ease-in-out;
+  }
+  
+  /* Description styling */
+  .equipment-description {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out 0.3s both;
+  }
+  
+  /* Equipment info styling */
+  .equipment-info {
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    animation: slideInRight 0.8s ease-in-out both;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .equipment-info:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .equipment-info p {
+    font-size: 1rem;
+    color: #333;
+    margin: 10px 0;
+    animation: fadeInUp 0.5s ease-in-out;
+    animation-fill-mode: both;
+  }
+  
+  .equipment-info p:nth-child(1) { animation-delay: 0.1s; }
+  .equipment-info p:nth-child(2) { animation-delay: 0.2s; }
+  .equipment-info p:nth-child(3) { animation-delay: 0.3s; }
+  .equipment-info p:nth-child(4) { animation-delay: 0.4s; }
+  .equipment-info p:nth-child(5) { animation-delay: 0.5s; }
+  .equipment-info p:nth-child(6) { animation-delay: 0.6s; }
+  .equipment-info p:nth-child(7) { animation-delay: 0.7s; }
+  .equipment-info p:nth-child(8) { animation-delay: 0.8s; }
+  
+  .equipment-info p strong {
+    color: #2c784e;
+    font-weight: 600;
+  }
+  
+  /* Loading state */
+  .equipment-loading {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #2c784e;
+    margin: 50px auto;
+    animation: pulse 1.5s infinite;
+  }
+  
+  /* Features list styling */
+  .equipment-features {
+    margin: 25px 0;
+    padding-left: 20px;
+    list-style-type: none;
+    font-size: 1rem;
+    color: #555;
+    animation: slideInLeft 0.8s ease-in-out 0.2s both;
+  }
+  
+  .equipment-features li {
+    position: relative;
+    padding: 8px 0 8px 30px;
+    animation: fadeInUp 0.5s ease-in-out;
+    animation-fill-mode: both;
+  }
+  
+  .equipment-features li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #34a853;
+    font-weight: bold;
+    animation: scaleIn 0.3s ease-in-out;
+  }
+  
+  .equipment-features li:nth-child(1) { animation-delay: 0.3s; }
+  .equipment-features li:nth-child(2) { animation-delay: 0.5s; }
+  .equipment-features li:nth-child(3) { animation-delay: 0.7s; }
+  .equipment-features li:nth-child(4) { animation-delay: 0.9s; }
+  .equipment-features li:nth-child(5) { animation-delay: 1.1s; }
+  
+  /* Images grid styling */
+  .equipment-images {
+    margin: 30px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    animation: fadeIn 1s ease-in-out 0.5s both;
+  }
+  
+  .equipment-images img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    animation: zoomIn 0.8s ease-in-out;
+  }
+  
+  .equipment-images img:hover {
+    transform: scale(1.05) rotate(1deg);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+  }
+  
+  /* Reviews section styling */
+  .equipment-reviews {
+    margin-top: 40px;
+    animation: fadeIn 1s ease-in-out 0.7s both;
+  }
+  
+  .reviews-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+    animation: slideInLeft 0.6s ease;
+  }
+  
+  .average-rating {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #2c784e;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+  }
+  
+  .no-reviews {
+    font-style: italic;
+    color: #666;
+    text-align: center;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    animation: fadeIn 0.8s ease;
+  }
+  
+  .review-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    animation: slideInUp 0.5s ease-in-out;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review-user {
+    margin: 5px 0;
+    font-size: 1.1rem;
+  }
+  
+  .review-rating {
+    margin: 5px 0;
+    color: #f0ad4e;
+    font-size: 1.1rem;
+  }
+  
+  .review-comment {
+    margin: 10px 0;
+    line-height: 1.5;
+    color: #444;
+  }
+  
+  .review-reply {
+    margin-top: 15px;
+    padding: 12px;
+    background: #f0f7f2;
+    border-left: 4px solid #34a853;
+    border-radius: 0 6px 6px 0;
+    animation: slideInRight 0.5s ease-in-out;
+  }
+  
+  .review-reply p {
+    margin: 0;
+    color: #333;
+  }
+  
+  .review-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    animation: fadeIn 0.8s ease;
+  }
+  
+  .edit-review-btn, 
+  .delete-review-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .edit-review-btn {
+    background: #4285f4;
+    color: white;
+  }
+  
+  .edit-review-btn:hover {
+    background: #3367d6;
+    transform: translateY(-2px);
+  }
+  
+  .delete-review-btn {
+    background: #ea4335;
+    color: white;
+  }
+  
+  .delete-review-btn:hover {
+    background: #d23226;
+    transform: translateY(-2px);
+  }
+  
+  .reply-section {
+    margin-top: 15px;
+    animation: fadeIn 0.8s ease;
+  }
+  
+  .reply-section textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .reply-section textarea:focus {
+    border-color: #34a853;
+    box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.2);
+    outline: none;
+  }
+  
+  .reply-btn {
+    padding: 8px 16px;
+    background: #34a853;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .reply-btn:hover {
+    background: #2c784e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Review form styling */
+  .review-form {
+    margin-top: 30px;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    animation: slideInUp 0.8s ease-in-out;
+  }
+  
+  .form-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .review-rating-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='12' fill='%232c784e'%3E%3Cpath d='M8 12L0 0h16z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .review-rating-input:focus {
+    border-color: #34a853;
+    box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.2);
+    outline: none;
+  }
+  
+  .review-comment-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    min-height: 120px;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .review-comment-input:focus {
+    border-color: #34a853;
+    box-shadow: 0 0 0 3px rgba(52, 168, 83, 0.2);
+    outline: none;
+  }
+  
+  .submit-review-btn {
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #34a853, #2c784e);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+  }
+  
+  .submit-review-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #2c784e, #1e5d3e);
+  }
+  
+  .submit-review-btn:active {
+    transform: translateY(1px);
+  }
+  
+  /* Owner actions styling */
+  .owner-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    animation: fadeIn 1s ease-in-out 1s both;
+  }
+  
+  .edit-equipment-btn {
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #4285f4, #3367d6);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+  }
+  
+  .edit-equipment-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(66, 133, 244, 0.3);
+  }
+  
+  .edit-equipment-btn:active {
+    transform: translateY(1px);
+  }
+  
+  .delete-equipment-btn {
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #ea4335, #d23226);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+  }
+  
+  .delete-equipment-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(234, 67, 53, 0.3);
+  }
+  
+  .delete-equipment-btn:active {
+    transform: translateY(1px);
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: #ea4335;
+    font-size: 1rem;
+    margin-top: 15px;
+    text-align: center;
+    padding: 10px;
+    background: rgba(234, 67, 53, 0.1);
+    border-radius: 6px;
+    animation: shake 0.6s cubic-bezier(.36,.07,.19,.97) both;
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes expandLine {
+    from {
+      width: 0;
+      opacity: 0;
+    }
+    to {
+      width: 80px;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+      transform: translateX(5px);
+    }
+  }
+  
+  @keyframes scaleIn {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
