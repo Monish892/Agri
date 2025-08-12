@@ -9,9 +9,9 @@ dotenv.config();
 
 // In server.js
 const authRoutes = require('./routes/authroutes');
-const userRoutes = require('./routes/userRoutes');
-const equipmentRoutes = require('./routes/equipmentRoutes');
-const bookingRoutes = require('./routes/bookingRoutes');
+const userRoutes = require('./routes/userroutes');
+const equipmentRoutes = require('./routes/equipmentroutes');
+const bookingRoutes = require('./routes/bookingroutes');
 const paymentRoutes = require('./routes/paymentroutes');
 // const rentalroutes=require('./routes/rentalroutes')
 const analyticroutes = require('./routes/analyticsroutes');
