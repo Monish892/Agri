@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './Context/AuthContext';
-import AnimatedFooter from './components/AnimatedFooter'; // Import the new footer component
-
+import AnimatedFooter from './components/AnimatedFooter';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import Register from './pages/Register';
