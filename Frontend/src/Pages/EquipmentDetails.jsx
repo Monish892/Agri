@@ -124,7 +124,7 @@ const EquipmentDetails = () => {
       {equipment.images?.length > 0 && (
         <div className="equipment-images">
           {equipment.images.map((img, i) => (
-            <img key={i} src={img} alt={`equipment-${i}`} />
+            <img key={i} src={`https://agri-xyu3.onrender.com${img}`} alt={`equipment-${i}`} />
           ))}
         </div>
       )}

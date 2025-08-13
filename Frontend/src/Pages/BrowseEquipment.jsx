@@ -202,7 +202,7 @@ const BrowseEquipment = () => {
                 <div className="relative mb-3 overflow-hidden rounded-lg" style={{height: "200px"}}>
                   {item.images?.[0] ? (
                     <img 
-                    src={`http://localhost:5000${item.images[0]}`} 
+                    src={`https://agri-xyu3.onrender.com${item.images[0]}`}
 
                     alt={item.name} 
                     className="w-full h-full object-cover transition-transform hover:scale-105" 
