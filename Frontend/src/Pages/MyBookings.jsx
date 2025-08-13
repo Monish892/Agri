@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import api from '../Services/api';
-import { Loader2, Calendar, DollarSign, User, Tag } from 'lucide-react';
+import { Loader2, Calendar, DollarSign, User, Tag, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './MyBookings.css';
+
+const IMAGE_BASE_URL = import.meta.env.VITE_API_URL.replace('/api', '');
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -48,6 +50,18 @@ const MyBookings = () => {
       case 'rejected':
       case 'canceled': return 'rejected';
       default: return 'bg-gray-400';
+    }
+  };
+
+  // Delete booking handler
+  const handleDeleteBooking = async (bookingId) => {
+    if (!window.confirm('Are you sure you want to delete this booking?')) return;
+    try {
+      await api.delete(`/bookings/${bookingId}`);
+      // Refresh bookings after delete
+      fetchBookings(pagination.page, statusFilter);
+    } catch (err) {
+      alert('Failed to delete booking.');
     }
   };
 
@@ -109,47 +123,66 @@ const MyBookings = () => {
               className="booking-card"
               style={{ '--card-index': index }}
             >
-              <img
-                src={booking.equipment.images?.[0] || '/placeholder-equipment.jpg'}
-                alt={booking.equipment.name}
-                loading="lazy"
-              />
-              
-              <h3>{booking.equipment.name}</h3>
-              <p><Tag size={14} className="inline mr-1" /> {booking.equipment.category}</p>
-              
+              {/* Fix: Check equipment and images before rendering */}
+              {booking.equipment && booking.equipment.images && booking.equipment.images[0] ? (
+                <img
+                  src={`${IMAGE_BASE_URL}${booking.equipment.images[0]}`}
+                  alt={booking.equipment.name}
+                  loading="lazy"
+                />
+              ) : (
+                <img
+                  src="/placeholder-equipment.jpg"
+                  alt="No equipment"
+                  loading="lazy"
+                />
+              )}
+
+              <h3>{booking.equipment?.name || 'No equipment'}</h3>
+              <p><Tag size={14} className="inline mr-1" /> {booking.equipment?.category || 'N/A'}</p>
+
               <div className="mt-2">
                 <p>
-                  <User size={14} className="inline mr-1" /> 
-                  <strong>Owner:</strong> {booking.owner?.name || 'N/A'} 
+                  <User size={14} className="inline mr-1" />
+                  <strong>Owner:</strong> {booking.owner?.name || 'N/A'}
                   {booking.owner?.businessName && <span> ({booking.owner.businessName})</span>}
                 </p>
-                
+
                 <p>
                   <Calendar size={14} className="inline mr-1" />
-                  <strong>Start:</strong> {formatDate(booking.startDate)} | 
+                  <strong>Start:</strong> {formatDate(booking.startDate)} |
                   <strong> End:</strong> {formatDate(booking.endDate)}
                 </p>
-                
+
                 <p>
                   <strong>Status:</strong>{' '}
                   <span className={`status-badge ${getStatusClass(booking.status)}`}>
                     {booking.status}
                   </span>
                 </p>
-                
+
                 <p>
                   <DollarSign size={14} className="inline mr-1" />
                   <strong>Total:</strong> ₹{booking.totalAmount}
                 </p>
               </div>
 
-              <Link
-                to={`/bookings/farmer/${booking._id}`}
-                className="view-details-btn"
-              >
-                View Details
-              </Link>
+              <div className="booking-actions">
+                <Link
+                  to={`/bookings/farmer/${booking._id}`}
+                  className="view-details-btn"
+                >
+                  View Details
+                </Link>
+                <button
+                  className="delete-booking-btn"
+                  title="Delete Booking"
+                  onClick={() => handleDeleteBooking(booking._id)}
+                  style={{ marginLeft: '10px', background: 'none', border: 'none', cursor: 'pointer', color: '#e53e3e' }}
+                >
+                  <Trash2 size={20} />
+                </button>
+              </div>
             </div>
           ))}
         </div>

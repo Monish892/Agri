@@ -52,21 +52,28 @@ const CreateBookingForm = () => {
     const { name, value } = e.target;
     setForm((prevForm) => ({
       ...prevForm,
-      [name]: value, // Update the correct key in the form state
+      [name]: value,
     }));
   };
 
+  // Calculate duration in days (inclusive)
   const calculateDurationDays = () => {
     if (!form.startDate || !form.endDate) return 0;
     const start = new Date(form.startDate);
     const end = new Date(form.endDate);
-    const diffTime = Math.abs(end - start);
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    // Ensure both dates are valid
+    if (isNaN(start) || isNaN(end)) return 0;
+    // Calculate difference in milliseconds
+    const diffTime = end.getTime() - start.getTime();
+    if (diffTime < 0) return 0;
+    // Add 1 to include both start and end date
+    return Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
   };
 
+  // Calculate estimated total based on duration and daily rate
   const estimatedTotal = () => {
     const days = calculateDurationDays();
-    return equipment?.dailyRate ? days * equipment.dailyRate : 0;
+    return equipment?.dailyRate && days > 0 ? days * equipment.dailyRate : 0;
   };
 
   const handleSubmit = async (e) => {
@@ -110,6 +117,9 @@ const CreateBookingForm = () => {
     }
   };
 
+  // Use correct image base URL for equipment images
+  const IMAGE_BASE_URL = import.meta.env.VITE_API_URL.replace('/api', '');
+
   return (
     <div className="create-booking-form">
       <h1>Book Equipment</h1>
@@ -135,7 +145,7 @@ const CreateBookingForm = () => {
             <div className="flex flex-col md:flex-row gap-6">
               {equipment?.images?.[0] && (
                 <img
-                  src={equipment.images[0]}
+                  src={`${IMAGE_BASE_URL}${equipment.images[0]}`}
                   alt={equipment.name}
                   className="equipment-image"
                 />
@@ -161,40 +171,40 @@ const CreateBookingForm = () => {
             {error && <div className="status-message error">{error}</div>}
 
             <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-  <label>Start Date</label>
-  <input
-    name="startDate" // Matches the key in the form state
-    type="date"
-    value={form.startDate} // Bound to the form state
-    onChange={handleChange} // Updates the state
-    required
-    min={new Date().toISOString().split('T')[0]} // Prevent past dates
-  />
-</div>
+              <div>
+                <label>Start Date</label>
+                <input
+                  name="startDate"
+                  type="date"
+                  value={form.startDate}
+                  onChange={handleChange}
+                  required
+                  min={new Date().toISOString().split('T')[0]}
+                />
+              </div>
 
-<div>
-  <label>End Date</label>
-  <input
-    name="endDate" // Matches the key in the form state
-    type="date"
-    value={form.endDate} // Bound to the form state
-    onChange={handleChange} // Updates the state
-    required
-    min={form.startDate || new Date().toISOString().split('T')[0]} // Prevent dates before start date
-  />
-</div>
+              <div>
+                <label>End Date</label>
+                <input
+                  name="endDate"
+                  type="date"
+                  value={form.endDate}
+                  onChange={handleChange}
+                  required
+                  min={form.startDate || new Date().toISOString().split('T')[0]}
+                />
+              </div>
 
-<div>
-  <label>Special Requirements</label>
-  <textarea
-    name="specialRequirements" // Matches the key in the form state
-    placeholder="Any special requirements or instructions?"
-    value={form.specialRequirements} // Bound to the form state
-    onChange={handleChange} // Updates the state
-    rows="3"
-  />
-</div>
+              <div>
+                <label>Special Requirements</label>
+                <textarea
+                  name="specialRequirements"
+                  placeholder="Any special requirements or instructions?"
+                  value={form.specialRequirements}
+                  onChange={handleChange}
+                  rows="3"
+                />
+              </div>
 
               {form.startDate && form.endDate && (
                 <div className="estimated-total">

@@ -95,4 +95,12 @@ router.get(
   bookingController.getEquipmentUsageAnalytics
 );
 
+// ------------------- DELETE BOOKING ROUTE -------------------
+// Delete a booking by ID (Farmer can delete their own booking)
+router.delete(
+  '/:id',
+  [authMiddleware.verifyToken, authMiddleware.isFarmer],
+  bookingController.deleteBooking
+);
+
 module.exports = router;

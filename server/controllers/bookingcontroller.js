@@ -1,4 +1,3 @@
-// backend/controllers/bookingcontroller.js
 const Booking = require('../models/booking');
 const Equipment = require('../models/equipment');
 const { validationResult } = require('express-validator');
@@ -64,6 +63,29 @@ exports.createBooking = async (req, res) => {
     res.status(201).json({ message: 'Booking created', booking: populated });
   } catch (error) {
     sendError(res, 500, error.message);
+  }
+};
+
+// --------------------- DELETE BOOKING ---------------------
+exports.deleteBooking = async (req, res) => {
+  try {
+    const bookingId = req.params.id;
+    const userId = req.user._id;
+
+    const booking = await Booking.findById(bookingId);
+    if (!booking) return sendError(res, 404, 'Booking not found');
+
+    // Only the renter can delete their booking
+    if (!booking.renter.equals(userId)) {
+      return sendError(res, 403, 'Unauthorized: You can only delete your own bookings.');
+    }
+
+    await Booking.findByIdAndDelete(bookingId);
+
+    res.status(200).json({ message: 'Booking deleted successfully.' });
+  } catch (err) {
+    console.error('Delete booking error:', err);
+    sendError(res, 500, 'Failed to delete booking.');
   }
 };
 
