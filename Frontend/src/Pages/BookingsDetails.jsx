@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Loader2, CheckCircle, XCircle, AlertCircle, Calendar, DollarSign, User, Box, Truck, Clock, MapPin } from 'lucide-react';
 import api from '../Services/api';
@@ -18,28 +18,6 @@ const BookingDetails = () => {
     instructions: '',
   });
   const [showPickupForm, setShowPickupForm] = useState(false);
-  const [sdkReady, setSdkReady] = useState(false);
-  const paypalRef = useRef();
-
-  // Load PayPal SDK
-  useEffect(() => {
-    const loadPayPalScript = () => {
-      const existingScript = document.querySelector('script[src*="paypal.com/sdk/js"]');
-      if (existingScript) {
-        existingScript.onload = () => setSdkReady(true);
-        return;
-      }
-
-      const script = document.createElement('script');
-      script.src = `https://www.paypal.com/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}&currency=INR`;
-      script.async = true;
-      script.onload = () => setSdkReady(true);
-      script.onerror = () => setError('Failed to load PayPal SDK');
-      document.body.appendChild(script);
-    };
-
-    loadPayPalScript();
-  }, []);
 
   // Fetch booking details
   useEffect(() => {
@@ -65,47 +43,56 @@ const BookingDetails = () => {
     }
   }, [id]);
 
-  // Initialize PayPal Buttons
-  useEffect(() => {
-    if (!sdkReady || !booking || booking.paymentStatus === 'paid' || !paypalRef.current) return;
-
-    if (!window.paypal) {
-      setError('PayPal SDK is not loaded');
+  // Razorpay payment handler
+  const handleRazorpayPayment = async () => {
+    setPaymentStatus(null);
+    const scriptLoaded = await loadRazorpayScript();
+    if (!scriptLoaded) {
+      setPaymentStatus({ type: 'error', message: 'Failed to load Razorpay SDK' });
       return;
     }
 
-    window.paypal.Buttons({
-      createOrder: async () => {
-        try {
-          const res = await api.post('/payments/create-order', { bookingId: id });
-          if (!res.data.paypalOrderId) {
-            throw new Error('Order ID not returned from the server');
+    try {
+      // Create order on backend
+      const { data } = await api.post('/payments/create-razorpay-order', { bookingId: id });
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // Add this to your .env
+        amount: data.amount,
+        currency: data.currency,
+        name: 'AgriRent',
+        description: `Booking #${booking?._id}`,
+        order_id: data.razorpayOrderId,
+        handler: async function (response) {
+          try {
+            // Verify payment on backend
+            const verifyRes = await api.post('/payments/verify-razorpay-payment', {
+              bookingId: id,
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpaySignature: response.razorpay_signature,
+            });
+            setBooking(verifyRes.data.booking);
+            setPaymentStatus({ type: 'success', message: 'Payment successful! Your booking is confirmed.' });
+          } catch (err) {
+            setPaymentStatus({ type: 'error', message: 'Payment verification failed.' });
           }
-          return res.data.paypalOrderId;
-        } catch (error) {
-          setError('Failed to create PayPal order. Please try again.');
-        }
-      },
-      onApprove: async (data) => {
-        try {
-          const res = await api.post('/payments/confirm-payment', {
-            bookingId: id,
-            paypalOrderId: data.orderID,
-          });
-          setBooking(res.data.booking);
-          setPaymentStatus({ type: 'success', message: 'Payment successful! Your booking is confirmed.' });
-        } catch (err) {
-          setPaymentStatus({ type: 'error', message: 'Payment verification failed.' });
-        }
-      },
-      onError: () => {
-        setPaymentStatus({ type: 'error', message: 'Payment error occurred. Please try again.' });
-      },
-    }).render(paypalRef.current);
-  }, [sdkReady, booking]);
+        },
+        prefill: {
+          name: booking?.renter?.name || '',
+          email: booking?.renter?.email || '',
+          contact: booking?.renter?.contactNumber || '',
+        },
+        theme: { color: '#2c784e' },
+      };
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (err) {
+      setPaymentStatus({ type: 'error', message: err.response?.data?.message || 'Payment initiation failed.' });
+    }
+  };
 
+  // Helper functions (unchanged)
   const formatDate = (dateStr) => new Date(dateStr).toLocaleDateString();
-
   const handleCancel = async () => {
     if (!window.confirm('Are you sure you want to cancel this booking?')) return;
     try {
@@ -116,7 +103,6 @@ const BookingDetails = () => {
       setPaymentStatus({ type: 'error', message: 'Failed to cancel booking.' });
     }
   };
-
   const handlePickupDetailsSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -128,7 +114,6 @@ const BookingDetails = () => {
       setPaymentStatus({ type: 'error', message: 'Failed to save pickup details.' });
     }
   };
-
   const handlePickupInputChange = (e) => {
     const { name, value } = e.target;
     setPickupDetails((prev) => ({ ...prev, [name]: value }));
@@ -154,7 +139,6 @@ const BookingDetails = () => {
   }
 
   const days = Math.ceil((new Date(booking.endDate) - new Date(booking.startDate)) / (1000 * 60 * 60 * 24));
-
   const getStatusIcon = (status) => {
     switch (status) {
       case 'pending':
@@ -169,7 +153,6 @@ const BookingDetails = () => {
         return <AlertCircle size={18} />;
     }
   };
-
   const getPaymentStatusIcon = (status) => {
     switch (status) {
       case 'paid':
@@ -260,8 +243,10 @@ const BookingDetails = () => {
 
       <div className="mt-6 space-y-4">
         {booking?.paymentStatus !== 'paid' && booking?.status !== 'canceled' && (
-          <div className="paypal-container">
-            <div ref={paypalRef}></div>
+          <div className="razorpay-container">
+            <button className="btn" onClick={handleRazorpayPayment}>
+              Pay with Razorpay
+            </button>
           </div>
         )}
 
@@ -327,5 +312,17 @@ const BookingDetails = () => {
     </div>
   );
 };
+
+// Razorpay script loader
+function loadRazorpayScript() {
+  return new Promise((resolve) => {
+    if (window.Razorpay) return resolve(true);
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+}
 
 export default BookingDetails;
